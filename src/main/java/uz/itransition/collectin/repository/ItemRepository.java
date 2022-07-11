@@ -4,11 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import uz.itransition.collectin.entity.Item;
 
 import java.util.List;
 
+
+@Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
 
@@ -17,9 +20,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("select i from Item i inner join i.tags tags where tags.id = ?1")
     List<Item> findAllByTags_Id(Long tags_id);
-
-    int deleteAllByCollection_Id(Long id);
-
 
     @Query("select (count(i) > 0) from Item i inner join i.likedUsers likedUsers where i.id = ?1 and likedUsers.id = ?2")
     Boolean existsByIdAndLikedUsers_Id(Long itemId, Long userId);
@@ -44,6 +44,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     @Query(value = "select * from item i where i.doc @@ plainto_tsquery(:text)", nativeQuery = true)
     List<Item> fullTextSearch(String text);
 
-
+    void deleteAllByCollection_Id(Long id);
 
 }

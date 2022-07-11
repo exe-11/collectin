@@ -1,8 +1,6 @@
 package uz.itransition.collectin.controller;
 
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import uz.itransition.collectin.service.CollectionService;
-import uz.itransition.collectin.util.ExecutorScheduler;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,14 +19,13 @@ import static uz.itransition.collectin.controller.core.ControllerUtils.COLLECTIO
 @RequestMapping(COLLECTION_URI + "/csv")
 public class CSVController {
 
-    private final static Logger log = LoggerFactory.getLogger(CSVController.class);
 
     private final CollectionService collectionService;
 
-
-    public CSVController(ExecutorScheduler cleaner, CollectionService collectionService) {
+    public CSVController(CollectionService collectionService) {
         this.collectionService = collectionService;
     }
+
 
     @SneakyThrows
     @GetMapping()

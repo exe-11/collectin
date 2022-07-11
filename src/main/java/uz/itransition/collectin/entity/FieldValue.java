@@ -18,10 +18,10 @@ public class FieldValue extends BaseEntity {
 
     private String value;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Item item;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Field field;
 
 

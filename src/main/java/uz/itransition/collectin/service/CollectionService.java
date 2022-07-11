@@ -36,6 +36,8 @@ public class CollectionService implements CRUDService<Long, APIResponse, Collect
     private final TopicRepository topicRepository;
     private final FieldRepository fieldRepository;
 
+    private final CommentRepository commentRepository;
+
     private final FieldValueRepository fieldValueRepository;
     private final ItemRepository itemRepository;
     private final UserRepository userRepository;
@@ -105,9 +107,11 @@ public class CollectionService implements CRUDService<Long, APIResponse, Collect
 
     @Override
     public APIResponse delete(Long id) {
-        collectionRepository.deleteById(id);
-        fieldRepository.deleteAllByCollection_Id(id);
+        fieldValueRepository.deleteFieldValuesByField_Collection_Id(id);
+        fieldRepository.deleteFieldsByCollection_Id(id);
+        commentRepository.deleteCommentsByItem_Collection_Id(id);
         itemRepository.deleteAllByCollection_Id(id);
+        collectionRepository.deleteById(id);
         return APIResponse.success(true);
     }
 
@@ -138,6 +142,11 @@ public class CollectionService implements CRUDService<Long, APIResponse, Collect
         return collectionList
                 .stream()
                 .map(collection -> modelMapper.map(collection, CollectionResponse.class)).collect(Collectors.toList());
+    }
+
+    public APIResponse getAllUserCollection() {
+        final List<Collection> all = collectionRepository.findAll(Sort.by("creationDate").descending());
+        return APIResponse.success(List.of(modelMapper.map(all, CollectionResponse[].class)));
     }
 
     public String loadCSV(HttpServletResponse response, long collectionId, String lang) {

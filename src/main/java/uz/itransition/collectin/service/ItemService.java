@@ -111,6 +111,8 @@ public class ItemService implements CRUDService<Long, APIResponse, ItemRequest, 
     public APIResponse delete(Long id)
     {
         itemRepository.findById(id).orElseThrow(()->DataNotFoundException.of(ITEM_ENG,String.valueOf(id)));
+        fieldValueRepository.deleteFieldValuesByItem_Id(id);
+        commentRepository.deleteCommentsByItem_Id(id);
         itemRepository.deleteById(id);
         return APIResponse.success(HttpStatus.OK.value());
     }

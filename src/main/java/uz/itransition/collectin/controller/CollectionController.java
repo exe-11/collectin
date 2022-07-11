@@ -1,6 +1,7 @@
 package uz.itransition.collectin.controller;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import uz.itransition.collectin.controller.core.AbstractCRUDController;
 import uz.itransition.collectin.payload.request.collection.CollectionRequest;
@@ -35,5 +36,11 @@ public class CollectionController extends AbstractCRUDController<CollectionServi
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserCollections(@PathVariable("userId") Long id){
         return ResponseEntity.ok(service.getUserCollections(id));
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/all")
+    public ResponseEntity<?> getAllUserCollectionsForAdmin(){
+        return ResponseEntity.ok(service.getAllUserCollection());
     }
 }

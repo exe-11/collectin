@@ -26,7 +26,10 @@ public abstract class ControllerUtils {
             ITEM_URI + ALL,
             FIELD_URI + ALL,
             COLLECTION_URI + ALL,
+            SEARCH_URI + ALL,
             BASE_URI + AUTH + ALL,
+            "/socket/**",
+            "/app/**",
             "/swagger-ui/**",
             "/api-docs/**"
     };

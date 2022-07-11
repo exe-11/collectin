@@ -28,7 +28,7 @@ public class Item extends BaseEntity implements Searchable {
     @ManyToOne
     private Collection collection;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tag> tags;
 
     public Item(String name, Collection collection, List<Tag> tags) {
