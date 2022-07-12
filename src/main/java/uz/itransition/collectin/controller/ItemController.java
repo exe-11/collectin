@@ -35,6 +35,11 @@ public class ItemController extends AbstractCRUDController<ItemService, Long, It
         return ResponseEntity.ok(service.getItemResponse(itemId, userId));
     }
 
+    @GetMapping("/latest")
+    public ResponseEntity<APIResponse> getLatestTenItems(){
+        return ResponseEntity.ok(service.getTenLatest());
+    }
+
     @GetMapping("/like/{user_id}/{item_id}")
     public ResponseEntity<APIResponse> updateItemLike(
             @PathVariable("user_id") Long userId,

@@ -14,6 +14,11 @@ import java.util.List;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
 
+    @Query(value = "SELECT collection_id FROM item GROUP BY collection_id ORDER BY COUNT(collection_id) DESC LIMIT 5", nativeQuery = true)
+    List<Long> findLargeFiveCollectionIds();
+
+    @Query(value = "SELECT * FROM item  ORDER BY creation_date DESC LIMIT 10", nativeQuery = true)
+    List<Item> findLatestTenItemsBy();
 
     @Query("select i from Item i where i.collection.id = ?1")
     List<Item> findAllByCollection_Id(Long id);

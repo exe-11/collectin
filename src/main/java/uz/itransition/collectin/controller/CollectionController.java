@@ -29,9 +29,10 @@ public class CollectionController extends AbstractCRUDController<CollectionServi
     }
 
     @GetMapping("/latest")
-    public ResponseEntity<?> getLatestCollections(){
-        return ResponseEntity.ok(service.getLatestCollections());
+    public ResponseEntity<?> getTopCollections(){
+        return ResponseEntity.ok(service.getTopFiveCollections());
     }
+
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<?> getUserCollections(@PathVariable("userId") Long id){

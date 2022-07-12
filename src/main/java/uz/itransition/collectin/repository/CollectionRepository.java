@@ -14,4 +14,7 @@ public interface CollectionRepository extends JpaRepository<Collection, Long> {
 
     @Query(value = "select * from collection c where c.doc @@ plainto_tsquery(:text)", nativeQuery = true)
     List<Collection> fullTextSearch(String text);
+
+
+
 }

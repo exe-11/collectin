@@ -50,7 +50,8 @@ insert into collection(name,description,user_id,topic_id,creation_date,created_b
 insert into field(name,type,creation_date,created_by,collection_id)
 values ('name',2,now(),'anonymous',1),
 ('author',2,now(),'anonymous',1),
-('published year',1,now(),'anonymous',1);
+('published year',1,now(),'anonymous',1)
+;
 
 insert into item(name,collection_id,creation_date,created_by) values ('Effective Java 4-edition',1,now(),'anonymous');
 insert into field_value(value,field_id,item_id,creation_date,created_by)

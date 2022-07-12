@@ -63,6 +63,11 @@ public class ItemService implements CRUDService<Long, APIResponse, ItemRequest, 
         );
     }
 
+    public APIResponse getTenLatest(){
+        final List<Item> items = itemRepository.findLatestTenItemsBy();
+        List<ItemResponse> itemResponses = items.stream().map(item -> map(item, null)).collect(Collectors.toList());
+        return APIResponse.success(itemResponses);
+    }
 
 
     public APIResponse getItemResponse(Long id, Long userId) {
@@ -83,7 +88,7 @@ public class ItemService implements CRUDService<Long, APIResponse, ItemRequest, 
                 getFieldValueListResponse(item.getCollection().getId()),
                 item.getLikes(),
                 List.of(modelMapper.map(commentRepository.findAllByItemIdOrderByCreationDateDesc(item.getId()), CommentResponse[].class)),
-                itemRepository.existsByIdAndLikedUsers_Id(item.getId(), userId));
+                userId != null && itemRepository.existsByIdAndLikedUsers_Id(item.getId(), userId));
     }
 
     @Override
@@ -128,6 +133,8 @@ public class ItemService implements CRUDService<Long, APIResponse, ItemRequest, 
                 .collect(Collectors.groupingBy(ItemTagResponse::getItemId));
         return APIResponse.success(collect);
     }
+
+
 
     public APIResponse getItemsByCollectionId(Long collectionId) {
         return APIResponse.success(getFieldValueListResponse(collectionId));

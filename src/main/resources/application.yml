@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://collectin.c4fipmviafhe.us-east-1.rds.amazonaws.com:5432/db_collect_in
+    url: jdbc:postgresql://db-collectin.cg1bn5mbcm4e.us-east-1.rds.amazonaws.com:5432/db_collect_in
 #    url: jdbc:postgresql://localhost:5432/db_collect_in
     username: postgres
     password: 1596psql
