@@ -20,6 +20,7 @@ import uz.itransition.collectin.service.core.CRUDService;
 import uz.itransition.collectin.util.CSVCreator;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -105,6 +106,7 @@ public class CollectionService implements CRUDService<Long, APIResponse, Collect
                 collectionRequest.getCustomFields()));
     }
 
+    @Transactional
     @Override
     public APIResponse delete(Long id) {
         fieldValueRepository.deleteFieldValuesByField_Collection_Id(id);

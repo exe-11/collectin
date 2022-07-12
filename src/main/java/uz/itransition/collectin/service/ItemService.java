@@ -21,6 +21,7 @@ import uz.itransition.collectin.payload.response.tag.TagResponse;
 import uz.itransition.collectin.repository.*;
 import uz.itransition.collectin.service.core.CRUDService;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -107,6 +108,8 @@ public class ItemService implements CRUDService<Long, APIResponse, ItemRequest, 
         return getItemResponse(item.getId(), item.getCollection().getUser().getId());
     }
 
+
+    @Transactional
     @Override
     public APIResponse delete(Long id)
     {

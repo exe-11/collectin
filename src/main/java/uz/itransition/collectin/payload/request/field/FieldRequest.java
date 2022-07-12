@@ -10,6 +10,8 @@ import uz.itransition.collectin.service.marker.Modifiable;
 @Setter
 public class FieldRequest implements Request, Creationable, Modifiable {
 
+    private long id;
+
     private String name;
 
     private int type;

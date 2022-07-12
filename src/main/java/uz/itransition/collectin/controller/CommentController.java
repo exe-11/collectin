@@ -2,6 +2,8 @@ package uz.itransition.collectin.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,24 +27,17 @@ public class CommentController {
         this.simpMessagingTemplate = simpMessagingTemplate;
     }
 
-    @PreAuthorize("hasAnyRole('ROLE_USER')")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
     @PostMapping()
     public ResponseEntity<Void> sendMessage(@RequestBody CommentCreationRequest request) {
-        simpMessagingTemplate.convertAndSend("/topic/comments/" + request.getItemId(), commentService.create(request));
+        simpMessagingTemplate.convertAndSend("/topic/comment/" + request.getItemId(), commentService.create(request));
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
-//    @GetMapping("/item/{id}")
-//    public ResponseEntity<APIResponse> getComments(@PathVariable Long id) {
-//        return ResponseEntity.ok(commentService.getCommentsByItemId(id));
-//    }
-
-//    @MessageMapping("/item")
-//    @SendTo("/topic/comments")
-//    public ResponseEntity<APIResponse> sendComment(
-//            @Payload CommentCreationRequest comment
-//    ) {
-//        return ResponseEntity.ok(commentService.create(comment));
-//    }
+    //    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+    @MessageMapping("/comment") // app/comment
+    public ResponseEntity<Void> sendComment(@Payload CommentCreationRequest request) {
+        simpMessagingTemplate.convertAndSend("/topic/comment/" + request.getItemId(), commentService.create(request));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
