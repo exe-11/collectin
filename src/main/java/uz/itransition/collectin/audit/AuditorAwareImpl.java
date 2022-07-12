@@ -16,7 +16,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
     {
         final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if (Objects.nonNull(auth) && auth.isAuthenticated() && !"anonymous".equals(auth.getPrincipal()))
-            return  Optional.of(((User) auth.getPrincipal()).getEmail());
+            return  Optional.of(auth.getPrincipal().toString());
         return Optional.of("anonymous");
     }
 }
