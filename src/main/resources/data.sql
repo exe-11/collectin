@@ -37,6 +37,7 @@ alter table comment add column doc tsvector;
 create index doc_comment_index on comment using gin(doc);
 update comment set doc = to_tsvector(comment.text);
 
+
 create function comment_tsvektor_trigger() returns trigger as $$
 BEGIN
     new.doc:= to_tsvector(new.text);

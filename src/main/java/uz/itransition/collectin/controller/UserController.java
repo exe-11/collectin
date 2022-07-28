@@ -34,6 +34,7 @@ public class UserController extends AbstractCRUDController<UserService, Long, Us
         return ResponseEntity.ok(service.getUser(email));
     }
 
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/status")
     public ResponseEntity<APIResponse> updateUserStatus(

@@ -4,14 +4,15 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db-collectin.cg1bn5mbcm4e.us-east-1.rds.amazonaws.com:5432/db_collect_in
-#    url: jdbc:postgresql://localhost:5432/db_collect_in
+#    url: jdbc:postgresql://db-collectin.cg1bn5mbcm4e.us-east-1.rds.amazonaws.com:5432/db_collect_in
+    url: jdbc:postgresql://localhost:5432/db_oliy_mahad
     username: postgres
     password: 1596psql
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
+
 
   security:
     oauth2:
@@ -43,6 +44,8 @@ spring:
             authorizationUri: https://www.facebook.com/v3.0/dialog/oauth
             tokenUri: https://graph.facebook.com/v3.0/oauth/access_token
             userInfoUri: https://graph.facebook.com/v3.0/me?fields=id,first_name,middle_name,last_name,name,email,verified,is_verified,picture.width(250).height(250)
+
+
 app:
   auth:
     tokenSecret: 04ca023b39512e46d0c2cf4b48d5aac61d34302994c87ed4eff225dcf3b0a218739f3897051a057f9b846a69ea2927a587044164b7bae5e1306219d50b588cb1

@@ -18,7 +18,4 @@ public class FileManagementException extends ApiException{
         return new FileManagementException(FILE_DELETION_ERROR_ENG);
     }
 
-
-
-
 }

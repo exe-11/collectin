@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 public class CommentCreationRequest implements Creationable {
+
     @NotNull
     @JsonProperty("item_id")
     private Long itemId;

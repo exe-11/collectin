@@ -24,7 +24,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import static uz.itransition.collectin.component.ResourceConstants.ITEM_ENG;
+
+
 
 @Service
 public class SearchService {
@@ -55,17 +58,17 @@ public class SearchService {
         return APIResponse.success(res);
     }
 
-    private List<CollectionSearchResponse> searchCollection(String text) {
+    private List<CollectionSearchResponse> searchCollection(final String text) {
         final List<Collection> collections = collectionRepository.fullTextSearch(text);
         return Arrays.stream(modelMapper.map(collections, CollectionSearchResponse[].class)).collect(Collectors.toList());
     }
 
-    private List<ItemSearchResponse> searchItem(String text) {
+    private List<ItemSearchResponse> searchItem(final String text) {
         final List<Item> items = itemRepository.fullTextSearch(text);
         return Arrays.stream(modelMapper.map(items, ItemSearchResponse[].class)).collect(Collectors.toList());
     }
 
-    private List<CommentSearchResponse> searchComment(String text) {
+    private List<CommentSearchResponse> searchComment(final String text) {
         final List<Comment> comments = commentRepository.fullTextSearch(text);
         return Arrays.stream(modelMapper.map(comments, CommentSearchResponse[].class)).collect(Collectors.toList());
     }

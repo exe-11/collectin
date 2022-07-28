@@ -70,7 +70,7 @@ public class UserService implements CRUDService<Long, APIResponse, RegisterReque
             throw UserNotFoundException.of(String.valueOf(id));
         });
         repository.delete(user);
-        return APIResponse.success(user);
+        return APIResponse.success(HttpStatus.OK.name());
     }
 
     public APIResponse getUser(String email) {
